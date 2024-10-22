@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
 require('dotenv').config(); 
+const mongoose = require('mongoose');
 
 console.log('MongoDB URI:', process.env.MONGO_URI);
 const DB_URL = process.env.MONGO_URI; // Moved outside the try block

@@ -36,10 +36,10 @@ seedDatabase().catch(err => {
 
 const seedDummyData = async () => {
     const dummyLead = {
-        LastName: 'Doe',
-        FirstName: 'John',
-        Email: 'john.doe@example.com',
-        Company: 'Example Company',
+        LastName: 'eddfdds',
+        FirstName: 'sddsd',
+        Email: 'john.sdd@ssdds.com',
+        Company: 'sddssdds',
     };
 
     try {

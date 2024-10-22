@@ -11,6 +11,7 @@ const { transformData } = require('./etl'); // Assuming you have this function d
 const { checkConditionsAndSendAlerts, sendAlertEmail } = require('./alerts'); // Import the alert function
 const { Lead, Campaign } = require('./models'); // Import the models
 const { fetchLeads } = require('./salesforce'); // Import the Salesforce integration
+const { addSubscriber } = require('./marketing'); // Import the Mailchimp integration
 const app = express();
 const PORT = process.env.PORT || 3000; // This will now use 27017 if set in .env
 
@@ -83,6 +84,17 @@ app.get('/api/salesforce/leads', async (req, res) => {
         res.json(leads);
     } catch (error) {
         res.status(500).send('Error fetching leads from Salesforce: ' + error.message);
+    }
+});
+
+// Endpoint to subscribe to a Mailchimp list
+app.post('/api/subscribe', async (req, res) => {
+    const { email, listId } = req.body;
+    try {
+        const response = await addSubscriber(listId, email);
+        res.status(200).json({ message: 'Subscription successful', data: response });
+    } catch (error) {
+        res.status(500).json({ message: 'Subscription failed', error: error.message });
     }
 });
 
