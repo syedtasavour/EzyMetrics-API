@@ -2,7 +2,7 @@
 
 ## Overview
 
-EzyMetrics is a Node.js-based API designed for managing leads and campaigns. It integrates with a MongoDB database to store and retrieve data, provides endpoints for generating reports, and includes email notifications for alerts based on specific conditions. The API also integrates with Salesforce to manage leads.
+EzyMetrics is a Node.js-based API designed for managing leads and campaigns. It integrates with a MongoDB database to store and retrieve data, provides endpoints for generating reports, and includes email notifications for alerts based on specific conditions. The API also integrates with Salesforce and Mailchimp to manage leads and subscriptions.
 
 ## Table of Contents
 
@@ -16,6 +16,7 @@ EzyMetrics is a Node.js-based API designed for managing leads and campaigns. It 
   - [Reports](#reports)
   - [Email Notifications](#email-notifications)
   - [Salesforce Integration](#salesforce-integration)
+  - [Mailchimp Integration](#mailchimp-integration)
 - [Seeding the Database](#seeding-the-database)
 - [Contributing](#contributing)
 - [License](#license)
@@ -27,6 +28,7 @@ EzyMetrics is a Node.js-based API designed for managing leads and campaigns. It 
 - Email notifications for alerts when the number of leads exceeds a threshold.
 - Integration with MongoDB for data storage.
 - Integration with Salesforce for lead management.
+- Integration with Mailchimp for email subscriptions.
 
 ## Technologies Used
 
@@ -35,14 +37,14 @@ EzyMetrics is a Node.js-based API designed for managing leads and campaigns. It 
 - MongoDB (with Mongoose)
 - Nodemailer (for sending emails)
 - CSV Writer (for generating CSV reports)
-- Axios (for making HTTP requests to Salesforce)
+- Axios (for making HTTP requests to Salesforce and Mailchimp)
 
 ## Setup Instructions
 
 1. **Clone the Repository**:
    ```bash
    git clone https://github.com/syedtasavour/ezyMetrics-API.git
-   cd ezyMetrics
+   cd ezyMetrics-API
    ```
 
 2. **Install Dependencies**:
@@ -63,6 +65,8 @@ EzyMetrics is a Node.js-based API designed for managing leads and campaigns. It 
    SALESFORCE_PASSWORD=your_salesforce_password
    SALESFORCE_SECURITY_TOKEN=your_salesforce_security_token
    SALESFORCE_INSTANCE_URL=https://your_instance.salesforce.com
+   MAILCHIMP_API_KEY=your_mailchimp_api_key
+   MAILCHIMP_SERVER_PREFIX=your_server_prefix
    ```
 
 4. **Start the Server**:
@@ -82,6 +86,8 @@ EzyMetrics is a Node.js-based API designed for managing leads and campaigns. It 
 - `SALESFORCE_PASSWORD`: Your Salesforce password.
 - `SALESFORCE_SECURITY_TOKEN`: Your Salesforce security token.
 - `SALESFORCE_INSTANCE_URL`: The URL of your Salesforce instance.
+- `MAILCHIMP_API_KEY`: Your Mailchimp API key.
+- `MAILCHIMP_SERVER_PREFIX`: The server prefix for your Mailchimp account.
 
 ## API Endpoints
 
@@ -125,6 +131,19 @@ EzyMetrics is a Node.js-based API designed for managing leads and campaigns. It 
 - **GET /api/salesforce/leads**
   - Fetches leads from Salesforce.
   - **Response**: Array of lead objects from Salesforce.
+
+### Mailchimp Integration
+
+- **POST /api/subscribe**
+  - Subscribes an email to a Mailchimp list.
+  - **Request Body**:
+    ```json
+    {
+      "email": "subscriber@example.com",
+      "listId": "your_list_id"
+    }
+    ```
+  - **Response**: Subscription confirmation.
 
 ## Seeding the Database
 
