@@ -17,7 +17,6 @@ EzyMetrics is a Node.js-based API designed for managing leads and campaigns. It 
   - [Email Notifications](#email-notifications)
   - [Salesforce Integration](#salesforce-integration)
 - [Seeding the Database](#seeding-the-database)
-- [Testing](#testing)
 - [Contributing](#contributing)
 - [License](#license)
 
