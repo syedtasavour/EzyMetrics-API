@@ -42,7 +42,7 @@ EzyMetrics is a Node.js-based API designed for managing leads and campaigns. It 
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/syedtasavour/ezyMetrics.git
+   git clone https://github.com/syedtasavour/ezyMetrics-API.git
    cd ezyMetrics
    ```
 
