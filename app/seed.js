@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { Lead, Campaign } = require('./models');
 const connectDB = require('./database');
+const { createLead } = require('./salesforce');
 
 const seedDatabase = async () => {
     await connectDB();
@@ -32,3 +33,21 @@ seedDatabase().catch(err => {
     console.error('Error seeding database:', err);
     mongoose.connection.close();
 });
+
+const seedDummyData = async () => {
+    const dummyLead = {
+        LastName: 'Doe',
+        FirstName: 'John',
+        Email: 'john.doe@example.com',
+        Company: 'Example Company',
+    };
+
+    try {
+        const createdLead = await createLead(dummyLead);
+        console.log('Lead created successfully:', createdLead);
+    } catch (error) {
+        console.error('Error seeding dummy data:', error.message);
+    }
+};
+
+seedDummyData();

@@ -1,12 +1,18 @@
 require('dotenv').config(); // Load environment variables from .env file
 
+// Log environment variables for debugging
+console.log('Salesforce Client ID:', process.env.SALESFORCE_CLIENT_ID);
+console.log('Salesforce Client Secret:', process.env.SALESFORCE_CLIENT_SECRET);
+console.log('Salesforce Username:', process.env.SALESFORCE_USERNAME);
+
 const express = require('express');
 const { createObjectCsvWriter } = require('csv-writer');
 const { transformData } = require('./etl'); // Assuming you have this function defined
 const { checkConditionsAndSendAlerts, sendAlertEmail } = require('./alerts'); // Import the alert function
 const { Lead, Campaign } = require('./models'); // Import the models
+const { fetchLeads } = require('./salesforce'); // Import the Salesforce integration
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000; // This will now use 27017 if set in .env
 
 app.use(express.json()); // Middleware to parse JSON bodies
 
@@ -67,6 +73,16 @@ app.post('/api/test-email', async (req, res) => {
         res.status(200).send('Test email sent successfully.');
     } catch (error) {
         res.status(500).send('Error sending test email: ' + error.message);
+    }
+});
+
+// New endpoint to fetch leads from Salesforce
+app.get('/api/salesforce/leads', async (req, res) => {
+    try {
+        const leads = await fetchLeads();
+        res.json(leads);
+    } catch (error) {
+        res.status(500).send('Error fetching leads from Salesforce: ' + error.message);
     }
 });
 

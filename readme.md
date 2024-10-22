@@ -2,7 +2,7 @@
 
 ## Overview
 
-EzyMetrics is a Node.js-based API designed for managing leads and campaigns. It integrates with a MongoDB database to store and retrieve data, provides endpoints for generating reports, and includes email notifications for alerts based on specific conditions.
+EzyMetrics is a Node.js-based API designed for managing leads and campaigns. It integrates with a MongoDB database to store and retrieve data, provides endpoints for generating reports, and includes email notifications for alerts based on specific conditions. The API also integrates with Salesforce to manage leads.
 
 ## Table of Contents
 
@@ -15,7 +15,9 @@ EzyMetrics is a Node.js-based API designed for managing leads and campaigns. It 
   - [Campaigns](#campaigns)
   - [Reports](#reports)
   - [Email Notifications](#email-notifications)
+  - [Salesforce Integration](#salesforce-integration)
 - [Seeding the Database](#seeding-the-database)
+- [Testing](#testing)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -25,6 +27,7 @@ EzyMetrics is a Node.js-based API designed for managing leads and campaigns. It 
 - Generate CSV reports of leads.
 - Email notifications for alerts when the number of leads exceeds a threshold.
 - Integration with MongoDB for data storage.
+- Integration with Salesforce for lead management.
 
 ## Technologies Used
 
@@ -33,6 +36,7 @@ EzyMetrics is a Node.js-based API designed for managing leads and campaigns. It 
 - MongoDB (with Mongoose)
 - Nodemailer (for sending emails)
 - CSV Writer (for generating CSV reports)
+- Axios (for making HTTP requests to Salesforce)
 
 ## Setup Instructions
 
@@ -54,6 +58,12 @@ EzyMetrics is a Node.js-based API designed for managing leads and campaigns. It 
    EMAIL_USER=your_email@example.com
    EMAIL_PASS=your_email_password
    PORT=3000
+   SALESFORCE_CLIENT_ID=your_consumer_key
+   SALESFORCE_CLIENT_SECRET=your_consumer_secret
+   SALESFORCE_USERNAME=your_salesforce_username
+   SALESFORCE_PASSWORD=your_salesforce_password
+   SALESFORCE_SECURITY_TOKEN=your_salesforce_security_token
+   SALESFORCE_INSTANCE_URL=https://your_instance.salesforce.com
    ```
 
 4. **Start the Server**:
@@ -67,6 +77,12 @@ EzyMetrics is a Node.js-based API designed for managing leads and campaigns. It 
 - `EMAIL_USER`: The email address used for sending notifications.
 - `EMAIL_PASS`: The password for the email account.
 - `PORT`: The port on which the server will run (default is 3000).
+- `SALESFORCE_CLIENT_ID`: The Consumer Key from your Salesforce connected app.
+- `SALESFORCE_CLIENT_SECRET`: The Consumer Secret from your Salesforce connected app.
+- `SALESFORCE_USERNAME`: Your Salesforce username.
+- `SALESFORCE_PASSWORD`: Your Salesforce password.
+- `SALESFORCE_SECURITY_TOKEN`: Your Salesforce security token.
+- `SALESFORCE_INSTANCE_URL`: The URL of your Salesforce instance.
 
 ## API Endpoints
 
@@ -105,20 +121,12 @@ EzyMetrics is a Node.js-based API designed for managing leads and campaigns. It 
   - Sends a test email notification.
   - **Response**: Confirmation message.
 
+### Salesforce Integration
+
+- **GET /api/salesforce/leads**
+  - Fetches leads from Salesforce.
+  - **Response**: Array of lead objects from Salesforce.
+
 ## Seeding the Database
 
 To populate the database with initial data, run the following command:
-
-```bash
-node app/seed.js
-```
-
-This will create dummy leads and campaigns in your MongoDB database.
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a pull request or open an issue for any enhancements or bug fixes.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
